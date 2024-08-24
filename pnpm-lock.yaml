@@ -8,6 +8,9 @@ dependencies:
   '@babel/standalone':
     specifier: ^7.25.5
     version: 7.25.5
+  '@monaco-editor/react':
+    specifier: ^4.6.0
+    version: 4.6.0(monaco-editor@0.51.0)(react-dom@18.3.1)(react@18.3.1)
   react:
     specifier: ^18.2.0
     version: 18.3.1
@@ -16,6 +19,12 @@ dependencies:
     version: 18.3.1(react@18.3.1)
 
 devDependencies:
+  '@types/babel-core':
+    specifier: ^6.25.10
+    version: 6.25.10
+  '@types/babel__core':
+    specifier: ^7.20.5
+    version: 7.20.5
   '@types/babel__standalone':
     specifier: ^7.1.7
     version: 7.1.7
@@ -334,6 +343,61 @@ packages:
       '@jridgewell/sourcemap-codec': 1.5.0
     dev: true
 
+  /@monaco-editor/loader@1.4.0(monaco-editor@0.51.0):
+    resolution: {integrity: sha512-00ioBig0x642hytVspPl7DbQyaSWRaolYie/UFNjoTdvoKPzo6xrXLhTk9ixgIKcLH5b5vDOjVNiGyY+uDCUlg==}
+    peerDependencies:
+      monaco-editor: '>= 0.21.0 < 1'
+    dependencies:
+      monaco-editor: 0.51.0
+      state-local: 1.0.7
+    dev: false
+
+  /@monaco-editor/react@4.6.0(monaco-editor@0.51.0)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-RFkU9/i7cN2bsq/iTkurMWOEErmYcY6JiQI3Jn+WeR/FGISH8JbHERjpS9oRuSOPvDMJI0Z8nJeKkbOs9sBYQw==}
+    peerDependencies:
+      monaco-editor: '>= 0.25.0 < 1'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@monaco-editor/loader': 1.4.0(monaco-editor@0.51.0)
+      monaco-editor: 0.51.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /@types/babel-core@6.25.10:
+    resolution: {integrity: sha512-VyqZTf+n8wj+8Powi4k2PwQiHT6ESJb6BEX5IETfmPzdZ9G2sOtFIopdpC2TI3T4Tmf1Shys2QeRv4ZBi4U2EA==}
+    dependencies:
+      '@types/babel-generator': 6.25.8
+      '@types/babel-template': 6.25.5
+      '@types/babel-traverse': 6.25.10
+      '@types/babel-types': 7.0.15
+      '@types/babylon': 6.16.9
+    dev: true
+
+  /@types/babel-generator@6.25.8:
+    resolution: {integrity: sha512-f5l89J0UpYhTE6TFCxy3X+8pJVru1eig1fcvF9qHmOk9h1VxZimd+++tu5GShntCOdhE/MoZZ0SlpGTyh4XrKg==}
+    dependencies:
+      '@types/babel-types': 7.0.15
+    dev: true
+
+  /@types/babel-template@6.25.5:
+    resolution: {integrity: sha512-1f+n65xfg9ukqz+BaHYrCWe3Fymv4Ho0i9fU/MHri8MQKU+S4n+vexR5hXs+94d/fsaMLMP45q0hX6FRspKLiQ==}
+    dependencies:
+      '@types/babel-types': 7.0.15
+      '@types/babylon': 6.16.9
+    dev: true
+
+  /@types/babel-traverse@6.25.10:
+    resolution: {integrity: sha512-B3XitTFG8YeXb5lr7Nj62t1DikCDuAJ/4BDeK6GCuWREEmdunI9DWnv+81oHl2yQBQPWY/C1PmV3vaRZB4LQmw==}
+    dependencies:
+      '@types/babel-types': 7.0.15
+    dev: true
+
+  /@types/babel-types@7.0.15:
+    resolution: {integrity: sha512-JUgfZHUOMbtjopxiOQaaF+Uovk5wpDqpXR+XLWiOivCWSy1FccO30lvNNpCt8geFwq8VmGT2y9OMkOpA0g5O5g==}
+    dev: true
+
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
@@ -367,6 +431,12 @@ packages:
     resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
     dependencies:
       '@babel/types': 7.25.4
+    dev: true
+
+  /@types/babylon@6.16.9:
+    resolution: {integrity: sha512-sEKyxMVEowhcr8WLfN0jJYe4gS4Z9KC2DGz0vqfC7+MXFbmvOF7jSjALC77thvAO2TLgFUPa9vDeOak+AcUrZA==}
+    dependencies:
+      '@types/babel-types': 7.0.15
     dev: true
 
   /@types/prop-types@15.7.12:
@@ -765,6 +835,10 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
+  /monaco-editor@0.51.0:
+    resolution: {integrity: sha512-xaGwVV1fq343cM7aOYB6lVE4Ugf0UyimdD/x5PWcWBMKENwectaEu77FAN7c5sFiyumqeJdX1RPTh1ocioyDjw==}
+    dev: false
+
   /ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -855,6 +929,10 @@ packages:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     deprecated: Please use @jridgewell/sourcemap-codec instead
     dev: true
+
+  /state-local@1.0.7:
+    resolution: {integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==}
+    dev: false
 
   /supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}

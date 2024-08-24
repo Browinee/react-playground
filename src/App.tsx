@@ -1,34 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import Editor from "@monaco-editor/react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const code = `import { useEffect, useState } from "react";
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+function App() {
+    const [num, setNum] = useState(() => {
+        const num1 = 1 + 2;
+        const num2 = 2 + 3;
+        return num1 + num2
+    });
+
+    return (
+        <div onClick={() => setNum((prevNum) => prevNum + 1)}>{num}</div>
+    );
 }
 
-export default App
+export default App;
+`;
+
+  return (
+    <>
+      ssadfasdadsfasd
+      <Editor height="500px" defaultLanguage="javascript" defaultValue={code} />
+    </>
+  );
+}
+
+export default App;
