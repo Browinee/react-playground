@@ -1,10 +1,11 @@
 import Playground from "./components/Playground";
 import "./App.scss";
+import { PlaygroundProvider } from "./store/PlaygroundProvider";
 function App() {
   return (
-    <>
+    <PlaygroundProvider>
       <Playground />
-    </>
+    </PlaygroundProvider>
   );
 }
 
