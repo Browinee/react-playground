@@ -10,7 +10,7 @@ export function createATA(
     logger: console,
     delegate: {
       receivedFile: (code, path) => {
-        console.log("auto download: ", path);
+        // console.log("auto download: ", path);
         onDownloadFile(code, path);
       },
     },

@@ -2,14 +2,14 @@ import React, { createContext, PropsWithChildren, useState } from "react";
 import { fileName2Language } from "../utils";
 import { initFiles } from "../files";
 
-export interface File {
+export interface CustomFile {
   name: string;
   value: string;
   language: string;
 }
 
 export interface Files {
-  [key: string]: File;
+  [key: string]: CustomFile;
 }
 
 export interface PlaygroundContext {
