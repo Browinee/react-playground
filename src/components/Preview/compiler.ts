@@ -57,7 +57,6 @@ const getModuleFile = (files: Files, modulePath: string) => {
 
 const json2Js = (file: CustomFile) => {
   const js = `export default ${file.value}`;
-  console.log("js", js);
 
   return URL.createObjectURL(
     new Blob([js], { type: "application/javascript" })
@@ -86,7 +85,7 @@ function customResolver(files: Files): PluginObj {
   return {
     visitor: {
       ImportDeclaration(path) {
-        console.log("path", path);
+        // console.log("path", path);
 
         const modulePath = path.node.source.value;
         if (modulePath.startsWith(".")) {
@@ -110,10 +109,7 @@ function customResolver(files: Files): PluginObj {
     },
   };
 }
-export const compile = (
-  files: Files,
-  selectedFileName: string = ENTRY_FILE_NAME
-) => {
-  const main = files[selectedFileName];
+export const compile = (files: Files) => {
+  const main = files[ENTRY_FILE_NAME];
   return babelTransform(ENTRY_FILE_NAME, main.value, files);
 };
