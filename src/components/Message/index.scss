@@ -55,3 +55,13 @@ pre {
   border: none;
   border-radius: 9px;
 }
+
+.light {
+  --text: #444;
+  --bg: #fff;
+}
+
+.dark {
+  --text: #fff;
+  --bg: #1a1a1a;
+}
