@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import logoSvg from "./icons/logo.svg";
 import "./index.scss";
-
+import copy from "copy-to-clipboard";
 import {
   DownloadOutlined,
   MoonOutlined,
   ShareAltOutlined,
   SunOutlined,
 } from "@ant-design/icons";
+import { message } from "antd";
+
 import { PlaygroundContext } from "../../store/PlaygroundProvider";
 
 export default function Header() {
@@ -34,6 +36,13 @@ export default function Header() {
             onClick={() => setTheme("light")}
           />
         )}
+        <ShareAltOutlined
+          style={{ marginLeft: "10px" }}
+          onClick={() => {
+            copy(window.location.href);
+            message.success("shared link is copied");
+          }}
+        />
       </div>
     </div>
   );
