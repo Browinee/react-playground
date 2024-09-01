@@ -4,11 +4,15 @@ import { compile } from "./compiler";
 import { PlaygroundContext } from "../../store/PlaygroundProvider";
 import iframeRaw from "./iframe.html?raw";
 import { useGetIframe } from "./useGetIframe";
+import { Message } from "../Message";
+import { useIframeErrorHandler } from "./useIframeErrorHandler";
+
 export default function Preview() {
   const { selectedFileName, files } = useContext(PlaygroundContext);
   const [compiledCode, setCompiledCode] = useState("");
   const { iframeUrl } = useGetIframe(files, compiledCode);
 
+  const { error } = useIframeErrorHandler();
   useEffect(() => {
     const res = compile(files);
     setCompiledCode(res);
@@ -25,6 +29,8 @@ export default function Preview() {
           border: "none",
         }}
       />
+      <Message type="error" content={error} />
+
       {/* <Editor
         file={{
           name: "dist.js",
