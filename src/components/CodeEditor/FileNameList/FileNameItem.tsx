@@ -1,16 +1,27 @@
+import { Popconfirm } from "antd";
 import classnames from "classnames";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, MouseEventHandler } from "react";
 
 export interface FileNameItemProps {
   value: string;
   active: boolean;
   onClick: () => void;
   creating: boolean;
+  onRemove: MouseEventHandler;
   onEditComplete: (name: string) => void;
+  readonly: boolean;
 }
 
 export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
-  const { value, active = false, onClick, onEditComplete, creating } = props;
+  const {
+    readonly,
+    value,
+    active = false,
+    onClick,
+    onEditComplete,
+    creating,
+    onRemove,
+  } = props;
 
   const [name, setName] = useState(value);
 
@@ -40,11 +51,36 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
           ref={inputRef}
           className={"tabs-item-input"}
           value={name}
-          onChange={(e) => setName(e.target.value)}
           onBlur={handleInputBlur}
+          onChange={(e) => setName(e.target.value)}
         />
       ) : (
-        <span onDoubleClick={handleDoubleClick}>{name}</span>
+        <>
+          <span onDoubleClick={!readonly ? handleDoubleClick : () => {}}>
+            {name}
+          </span>
+          {!readonly ? (
+            <Popconfirm
+              title="Delete file?"
+              okText="confirm"
+              cancelText="cancel"
+              onConfirm={(e) => {
+                e?.stopPropagation();
+                onRemove(e);
+              }}
+            >
+              <span
+                style={{ marginLeft: 5, display: "flex" }}
+                // onClick={onRemove}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24">
+                  <line stroke="#999" x1="18" y1="6" x2="6" y2="18"></line>
+                  <line stroke="#999" x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </span>
+            </Popconfirm>
+          ) : null}
+        </>
       )}
     </div>
   );
