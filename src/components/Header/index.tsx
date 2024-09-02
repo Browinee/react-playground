@@ -11,9 +11,10 @@ import {
 import { message } from "antd";
 
 import { PlaygroundContext } from "../../store/PlaygroundProvider";
+import { downloadFiles } from "../../utils";
 
 export default function Header() {
-  const { theme, setTheme } = useContext(PlaygroundContext);
+  const { files, theme, setTheme } = useContext(PlaygroundContext);
 
   return (
     <div className={"header"}>
@@ -41,6 +42,13 @@ export default function Header() {
           onClick={() => {
             copy(window.location.href);
             message.success("shared link is copied");
+          }}
+        />
+        <DownloadOutlined
+          style={{ marginLeft: "10px" }}
+          onClick={async () => {
+            await downloadFiles(files);
+            message.success("Finish donload");
           }}
         />
       </div>
