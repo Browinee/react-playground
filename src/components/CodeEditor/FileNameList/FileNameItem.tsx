@@ -5,15 +5,16 @@ export interface FileNameItemProps {
   value: string;
   active: boolean;
   onClick: () => void;
+  creating: boolean;
   onEditComplete: (name: string) => void;
 }
 
 export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
-  const { value, active = false, onClick, onEditComplete } = props;
+  const { value, active = false, onClick, onEditComplete, creating } = props;
 
   const [name, setName] = useState(value);
 
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(creating);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDoubleClick = () => {
@@ -27,6 +28,11 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
     onEditComplete(name);
   };
 
+  useEffect(() => {
+    if (creating) {
+      inputRef?.current?.focus();
+    }
+  }, [creating]);
   return (
     <div className={classnames("tab-item", { active })} onClick={onClick}>
       {editing ? (

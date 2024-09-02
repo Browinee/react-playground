@@ -22,18 +22,28 @@ export default function FileNameList() {
   const handleEditComplete = (name: string, prevName: string) => {
     updateFileName(prevName, name);
     setSelectedFileName(name);
+    setCreating(false);
+  };
+  const [creating, setCreating] = useState(false);
+  const addTab = () => {
+    addFile("Comp" + Math.random().toString().slice(2, 8) + ".tsx");
+    setCreating(true);
   };
   return (
     <div className="tabs">
-      {tabs.map((item, index) => (
+      {tabs.map((item, index, arr) => (
         <FileNameItem
           key={item + index}
           value={item}
+          creating={creating && index === arr.length - 1}
           active={selectedFileName === item}
           onClick={() => setSelectedFileName(item)}
           onEditComplete={(name) => handleEditComplete(name, item)}
         ></FileNameItem>
       ))}
+      <div className={"add"} onClick={addTab}>
+        +
+      </div>
     </div>
   );
 }
