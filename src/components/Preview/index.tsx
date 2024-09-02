@@ -13,10 +13,11 @@ export default function Preview() {
   const { iframeUrl } = useGetIframe(files, compiledCode);
 
   const { error } = useIframeErrorHandler();
+
   useEffect(() => {
     const res = compile(files);
     setCompiledCode(res);
-  }, [selectedFileName]);
+  }, [selectedFileName, files]);
 
   return (
     <div style={{ height: "100%" }}>
