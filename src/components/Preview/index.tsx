@@ -1,12 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Editor from "../CodeEditor/Editor";
-import { compile } from "./compiler";
 import { PlaygroundContext } from "../../store/PlaygroundProvider";
 import iframeRaw from "./iframe.html?raw";
 import { useGetIframe } from "./useGetIframe";
 import { Message } from "../Message";
 import { useIframeErrorHandler } from "./useIframeErrorHandler";
+import CompileWorker from "./compiler.worker?worker";
+import { debounce } from "lodash-es";
 
+interface MessageData {
+  data: {
+    type: string;
+    message: string;
+  };
+}
 export default function Preview() {
   const { selectedFileName, files } = useContext(PlaygroundContext);
   const [compiledCode, setCompiledCode] = useState("");
@@ -14,10 +21,27 @@ export default function Preview() {
 
   const { error } = useIframeErrorHandler();
 
+  const compilerWorkerRef = useRef<Worker>();
   useEffect(() => {
-    const res = compile(files);
-    setCompiledCode(res);
-  }, [selectedFileName, files]);
+    if (!compilerWorkerRef.current) {
+      compilerWorkerRef.current = new CompileWorker();
+      compilerWorkerRef.current.addEventListener("message", (data) => {
+        console.log("worker", data);
+        if (data.type === "COMPILED_CODE") {
+          setCompiledCode(data.data);
+        } else {
+          //console.log('error', data);
+        }
+      });
+    }
+  }, []);
+
+  useEffect(
+    debounce(() => {
+      compilerWorkerRef.current?.postMessage(files);
+    }, 500),
+    [files]
+  );
 
   return (
     <div style={{ height: "100%" }}>
