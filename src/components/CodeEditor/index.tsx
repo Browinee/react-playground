@@ -9,17 +9,17 @@ export default function CodeEditor() {
     useContext(PlaygroundContext);
   const file = files[selectedFileName];
 
-  function onEditorChange(value?: string) {
+  const onEditorChange = debounce((value?: string) => {
     files[file.name].value = value!;
     setFiles({ ...files });
-  }
+  }, 500);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <FileNameList />
       <Editor
         file={file}
-        onChange={debounce(onEditorChange, 500)}
+        onChange={onEditorChange}
         options={{
           theme: `vs-${theme}`,
         }}
