@@ -18,10 +18,11 @@ interface MessageData {
 export default function Preview() {
   const { files } = useContext(PlaygroundContext);
   const [compiledCode, setCompiledCode] = useState("");
+  useCompileWorker(files, setCompiledCode);
+
   const { iframeUrl } = useGetIframe(files, compiledCode);
 
   const { error } = useIframeErrorHandler();
-  useCompileWorker(files, setCompiledCode);
   return (
     <div style={{ height: "100%" }}>
       <iframe

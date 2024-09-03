@@ -3,13 +3,17 @@ import { Files } from "../store/PlaygroundProvider";
 import JSZip from "jszip";
 import saveAs from "file-saver";
 
+const LANGUAGE_MAP: { [key: string]: string } = {
+  js: "javascript",
+  jsx: "javascript",
+  ts: "typescript",
+  tsx: "typescript",
+  json: "json",
+  css: "css",
+};
 export const fileName2Language = (name: string) => {
   const suffix = name.split(".").pop() || "";
-  if (["js", "jsx"].includes(suffix)) return "javascript";
-  if (["ts", "tsx"].includes(suffix)) return "typescript";
-  if (["json"].includes(suffix)) return "json";
-  if (["css"].includes(suffix)) return "css";
-  return "javascript";
+  return LANGUAGE_MAP[suffix] || "javascript";
 };
 
 export function compress(data: string): string {
