@@ -1,8 +1,8 @@
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
-import Header from "../Header";
-import CodeEditor from "../CodeEditor";
-import Preview from "../Preview";
+import Header from "../../components/Header";
+import CodeEditor from "../../components/CodeEditor";
+import Preview from "../../components/Preview";
 import "./index.scss";
 import { PlaygroundContext } from "../../store/PlaygroundProvider";
 import { useContext } from "react";

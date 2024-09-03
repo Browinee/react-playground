@@ -1,4 +1,4 @@
-import Playground from "./components/Playground";
+import Playground from "./module/Playground";
 import "./App.scss";
 import { PlaygroundProvider } from "./store/PlaygroundProvider";
 function App() {

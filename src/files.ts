@@ -9,6 +9,7 @@ export const APP_COMPONENT_FILE_NAME = "App.tsx";
 // esm  module
 export const IMPORT_MAP_FILE_NAME = "import-map.json";
 export const ENTRY_FILE_NAME = "main.tsx";
+export const APP_CSS_FILE_NAME = "App.css";
 
 export const initFiles: Files = {
   [ENTRY_FILE_NAME]: {
@@ -21,9 +22,9 @@ export const initFiles: Files = {
     language: fileName2Language(APP_COMPONENT_FILE_NAME),
     value: App,
   },
-  "App.css": {
-    name: "App.css",
-    language: "css",
+  [APP_CSS_FILE_NAME]: {
+    name: APP_CSS_FILE_NAME,
+    language: fileName2Language(APP_CSS_FILE_NAME),
     value: AppCss,
   },
   [IMPORT_MAP_FILE_NAME]: {
