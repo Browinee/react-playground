@@ -7,6 +7,7 @@ import { Message } from "../Message";
 import { useIframeErrorHandler } from "./useIframeErrorHandler";
 import CompileWorker from "./compiler.worker?worker";
 import { debounce } from "lodash-es";
+import { useCompileWorker } from "./useCompileWorker";
 
 interface MessageData {
   data: {
@@ -15,34 +16,12 @@ interface MessageData {
   };
 }
 export default function Preview() {
-  const { selectedFileName, files } = useContext(PlaygroundContext);
+  const { files } = useContext(PlaygroundContext);
   const [compiledCode, setCompiledCode] = useState("");
   const { iframeUrl } = useGetIframe(files, compiledCode);
 
   const { error } = useIframeErrorHandler();
-
-  const compilerWorkerRef = useRef<Worker>();
-  useEffect(() => {
-    if (!compilerWorkerRef.current) {
-      compilerWorkerRef.current = new CompileWorker();
-      compilerWorkerRef.current.addEventListener("message", (data) => {
-        console.log("worker", data);
-        if (data.type === "COMPILED_CODE") {
-          setCompiledCode(data.data);
-        } else {
-          //console.log('error', data);
-        }
-      });
-    }
-  }, []);
-
-  useEffect(
-    debounce(() => {
-      compilerWorkerRef.current?.postMessage(files);
-    }, 500),
-    [files]
-  );
-
+  useCompileWorker(files, setCompiledCode);
   return (
     <div style={{ height: "100%" }}>
       <iframe
